@@ -41,7 +41,7 @@ class SIATextLog(SIABaseEntity):
     def update_state(self, sia_event) -> bool:
         """Werk de status van de entiteit bij en log het evenement."""
 
-        _LOGGER.info(f"Ontvangen SIA evenement: {sia_event.sia_code}")
+        _LOGGER.debug(f"Ontvangen SIA evenement: {sia_event.sia_code}")
         # Controleer of de code een beschrijving heeft
         if sia_event.sia_code.code == "RP":
             return False
@@ -89,6 +89,19 @@ async def generate_text_logs(hass, entry: ConfigEntry) -> Iterable[SIATextLog]:
                 entity_description=ENTITY_DESCRIPTION_LOG,
             )
         )
+
+        # Voeg een log-entiteit toe voor elke zone
+        i = 0
+        while i < zones:
+            entities.append(
+            SIATextLog(
+                entry=entry,
+                account=account,
+                zone=i+1,
+                entity_description=ENTITY_DESCRIPTION_LOG,
+            )
+        )
+            i += 1
 
     return entities
 

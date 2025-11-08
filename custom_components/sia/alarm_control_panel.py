@@ -124,11 +124,11 @@ class SIAAlarmControlPanel(SIABaseEntity, AlarmControlPanelEntity):
             new_state = self.entity_description.code_consequences.get(sia_event.code)
         if new_state is None:
             return False
-        _LOGGER.debug("New state will be %s", new_state)
+        _LOGGER.debug("New state will be %s (previous state: %s, current state: %s)", new_state, self._old_state, self.state)
         if new_state == PREVIOUS_STATE:
             if self._old_state != 'triggered':
                 new_state = self._old_state
             else:
-                new_state = self._state
+                new_state = self.state
         self.alarm_state, self._old_state = new_state, self.alarm_state
         return True
