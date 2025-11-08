@@ -7,5 +7,5 @@
   "documentation": "https://www.home-assistant.io/integrations/sia",
   "iot_class": "local_push",
   "loggers": ["pysiaalarm"],
-  "requirements": ["git+https://github.com/voskuh/pysiaalarm.git@merge-upstream#pysiaalarm"]
+  "requirements": ["git+https://github.com/RPJacobs/pysiaalarm@master#pysiaalarm==4.0.1"]
 }
